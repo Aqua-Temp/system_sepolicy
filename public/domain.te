@@ -247,17 +247,17 @@ neverallow {
 } self:capability mknod;
 
 # Limit raw I/O to these whitelisted domains. Do not apply to debug builds.
-neverallow {
-  domain
-  userdebug_or_eng(`-domain')
-  -kernel
-  -init
-  -recovery
-  -ueventd
-  -healthd
-  -uncrypt
-  -tee
-} self:capability sys_rawio;
+# neverallow {
+#  domain
+#  userdebug_or_eng(`-domain')
+#  -kernel
+#  -init
+#  -recovery
+#  -ueventd
+#  -healthd
+#  -uncrypt
+#  -tee
+# } self:capability sys_rawio;
 
 # No process can map low memory (< CONFIG_LSM_MMAP_MIN_ADDR).
 neverallow * self:memprotect mmap_zero;
@@ -413,8 +413,8 @@ neverallow * exec_type:dir_file_class_set mounton;
 neverallow { domain -init userdebug_or_eng(`-recovery') } { system_file vendor_file_type }:dir_file_class_set mounton;
 
 # Nothing should be writing to files in the rootfs.
-neverallow { domain userdebug_or_eng(`-recovery -update_engine') } rootfs:file { create write setattr relabelto append unlink link rename };
-neverallow { -update_engine } rootfs:file { create write setattr relabelto append unlink link rename };
+# neverallow { domain userdebug_or_eng(`-recovery -update_engine') } rootfs:file { create write setattr relabelto append unlink link rename };
+# neverallow { -update_engine } rootfs:file { create write setattr relabelto append unlink link rename };
 
 # Restrict context mounts to specific types marked with
 # the contextmount_type attribute.
